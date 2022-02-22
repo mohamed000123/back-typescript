@@ -11,7 +11,6 @@ app.get('/', (req, res) => {
     res.send('Well done!');
 });
 app.listen(3000, () => {
-    console.log('The application is listening on port 3000! ');
 });
 app.use(body_parser_1.default.json());
 app.use("/api/tasks", tasks_cjs_1.tasksRouter);

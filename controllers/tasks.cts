@@ -25,8 +25,19 @@ export const addTask =(req:any,res:any)=>{
 
 
 export const getTasks =  (req:any, res:any)=>{
-    res.send(tasks)
+        let searched=[]
+        if (req.params.query){
+            console.log(req.params.query)
+            searched= tasks.filter((task:any) => {
+                return ( task.title.toUpperCase().includes(req.params.query.toUpperCase()) || task.description.toUpperCase().includes(req.params.query.toUpperCase())  )   
+        })
     }
+        else{
+            searched=tasks
+        }
+        res.send(searched)   
+    }
+    
 
 
 export const del =  (req:any,res:any)=>{

@@ -4,10 +4,9 @@ import { tasksRouter } from "./routes/tasks.cjs";
 const app = express();
 
 app.get('/', (req, res) => {
-    res.send('Well done!');
 })
 
-app.listen(3000, () => {
+app.listen(4000, () => {
 })
 
 app.use(bodyParser.json())     

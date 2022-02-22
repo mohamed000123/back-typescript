@@ -26,7 +26,17 @@ const addTask = (req, res) => {
 };
 exports.addTask = addTask;
 const getTasks = (req, res) => {
-    res.send(exports.tasks);
+    let searched = [];
+    if (req.params.query) {
+        console.log(req.params.query);
+        searched = exports.tasks.filter((task) => {
+            return (task.title.toUpperCase().includes(req.params.query.toUpperCase()) || task.description.toUpperCase().includes(req.params.query.toUpperCase()));
+        });
+    }
+    else {
+        searched = exports.tasks;
+    }
+    res.send(searched);
 };
 exports.getTasks = getTasks;
 const del = (req, res) => {

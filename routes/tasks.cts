@@ -5,7 +5,7 @@ export  const tasksRouter = express.Router( ) ;
 
 tasksRouter.post("/" , addTask)
 
-tasksRouter.get("/" , getTasks)  
+tasksRouter.get("/:query?" , getTasks)  
 
 tasksRouter.delete("/:id" , del)
 

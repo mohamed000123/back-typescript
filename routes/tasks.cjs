@@ -8,6 +8,6 @@ const express_1 = __importDefault(require("express"));
 const tasks_cjs_1 = require("../controllers/tasks.cjs");
 exports.tasksRouter = express_1.default.Router();
 exports.tasksRouter.post("/", tasks_cjs_1.addTask);
-exports.tasksRouter.get("/", tasks_cjs_1.getTasks);
+exports.tasksRouter.get("/:query?", tasks_cjs_1.getTasks);
 exports.tasksRouter.delete("/:id", tasks_cjs_1.del);
 exports.tasksRouter.patch("/:id", tasks_cjs_1.Update);
