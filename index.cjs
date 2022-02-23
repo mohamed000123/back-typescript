@@ -8,7 +8,6 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const tasks_cjs_1 = require("./routes/tasks.cjs");
 const app = (0, express_1.default)();
 app.get('/', (req, res) => {
-    res.send('Well done!');
 });
 app.listen(3000, () => {
 });

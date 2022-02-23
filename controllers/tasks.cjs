@@ -20,7 +20,6 @@ exports.tasks = [
 ];
 const addTask = (req, res) => {
     const task = req.body;
-    console.log(task);
     exports.tasks.push(task);
     res.send(exports.tasks);
 };
@@ -28,7 +27,6 @@ exports.addTask = addTask;
 const getTasks = (req, res) => {
     let searched = [];
     if (req.params.query) {
-        console.log(req.params.query);
         searched = exports.tasks.filter((task) => {
             return (task.title.toUpperCase().includes(req.params.query.toUpperCase()) || task.description.toUpperCase().includes(req.params.query.toUpperCase()));
         });
@@ -41,12 +39,15 @@ const getTasks = (req, res) => {
 exports.getTasks = getTasks;
 const del = (req, res) => {
     const id = req.params.id;
-    const newtasks = exports.tasks.filter((task) => {
+    const NewTaks = exports.tasks.filter((task) => {
         return task.id != id;
     });
-    exports.tasks = newtasks;
-    console.log(exports.tasks);
-    res.send("task was deleted successfuly");
+    exports.tasks = exports.tasks.splice((id - 1), 1);
+    exports.tasks = NewTaks;
+    res.send({
+        message: "task was deleted successfuly",
+        tasks: NewTaks
+    });
 };
 exports.del = del;
 const Update = (req, res) => {
@@ -54,14 +55,14 @@ const Update = (req, res) => {
     const task = exports.tasks.find((task) => {
         return task.id == id;
     });
-    console.log(task);
     const { title, description } = req.body;
-    if (title) {
+    if (title)
         task.title = title;
-    }
-    if (description) {
+    if (description)
         task.description = description;
-    }
-    res.send("updated successfuly");
+    res.send({
+        message: "Updated successfuly",
+        tasks: exports.tasks
+    });
 };
 exports.Update = Update;

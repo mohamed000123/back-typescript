@@ -1,24 +1,7 @@
-export let tasks :any=  [
-    {
-    id:1,
-    title:"Learn React",
-    description:"learn how to use react "
-},
-{
-    id:2,
-    title:"Learn nodeJs",
-    description:"learn how to use nodeJs "
-},
-{
-    id:3,
-    title:"Learn Array Manipulation",
-    description:"learn manipulate arrays"
-}
-]
+export let tasks :any=  []
 
 export const addTask =(req:any,res:any)=>{
      const task = req.body;
-     console.log(task);
       tasks.push(task);
       res.send(tasks)
     }
@@ -27,7 +10,6 @@ export const addTask =(req:any,res:any)=>{
 export const getTasks =  (req:any, res:any)=>{
         let searched=[]
         if (req.params.query){
-            console.log(req.params.query)
             searched= tasks.filter((task:any) => {
                 return ( task.title.toUpperCase().includes(req.params.query.toUpperCase()) || task.description.toUpperCase().includes(req.params.query.toUpperCase())  )   
         })
@@ -42,12 +24,16 @@ export const getTasks =  (req:any, res:any)=>{
 
 export const del =  (req:any,res:any)=>{
     const id  = req.params.id
-    const newtasks = tasks.filter((task:any)=>{
+    const NewTaks = tasks.filter((task:any)=>{
         return task.id != id
     })
-    tasks=newtasks
-    console.log(tasks)
-    res.send("task was deleted successfuly")
+    tasks=tasks.splice( (id-1), 1)
+    tasks=NewTaks
+    res.send( {
+        message:"task was deleted successfuly" ,
+        tasks :  NewTaks
+    } )
+    
 }
 
 export const Update =  (req:any,res:any)=>{
@@ -55,13 +41,11 @@ export const Update =  (req:any,res:any)=>{
     const task = tasks.find((task:any)=>{
         return task.id == id
     })
-    console.log(task)
     const { title ,description } = req.body
-    if(title){
-        task.title=title
-    }
-    if(description){
-        task.description=description
-    }
-    res.send("updated successfuly")
+    if(title)  task.title=title
+    if(description) task.description=description
+     res.send( {
+        message:"Updated successfuly" ,
+        tasks :  tasks
+    } )
 }
