@@ -1,23 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Update = exports.del = exports.getTasks = exports.addTask = exports.tasks = void 0;
-exports.tasks = [
-    {
-        id: 1,
-        title: "Learn React",
-        description: "learn how to use react "
-    },
-    {
-        id: 2,
-        title: "Learn nodeJs",
-        description: "learn how to use nodeJs "
-    },
-    {
-        id: 3,
-        title: "Learn Array Manipulation",
-        description: "learn manipulate arrays"
-    }
-];
+exports.tasks = [];
 const addTask = (req, res) => {
     const task = req.body;
     exports.tasks.push(task);
